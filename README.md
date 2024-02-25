@@ -19,7 +19,7 @@ styled-components
  - Create Styles and divide responsabilities
 
 Completed Requirements
-  MANDATORY
+ - MANDATORY
  - Update TasksList to not show the completed tasks.
  - Implement History to show the completed tasks.
  - Add the ability to modify task details by pressing on the corresponding row. (see #Hints)
