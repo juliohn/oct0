@@ -27,6 +27,7 @@ Completed Requirements
 
  - OPTIONAL
  - Add some settings to the app's settings screen, there is no restriction to what can this screen
+   
    -- Implements dark/light mode change
    -- Add Lottie animation top with indication config app/profile
    
