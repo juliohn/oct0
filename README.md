@@ -3,8 +3,8 @@
 
 Libs Used/Extras
 
-xstate Manager State Global on App 
-  -Tasks done and open
+- xstate Manager State Global on App 
+  - Tasks done,open,editi,delete,save
   
 lottie-react-native
  - Animation on Setting Screen top
