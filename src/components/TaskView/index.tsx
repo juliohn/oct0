@@ -1,5 +1,7 @@
 import React, {useState, useMemo, useCallback} from 'react';
 
+import {Animated} from 'react-native';
+
 import {Task} from '../../models/Task';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -37,6 +39,20 @@ export const TaskView = ({
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const opacity = useState(new Animated.Value(1))[0];
+
+  const fadeOutToggleTask = () => {
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+
+    setTimeout(() => {
+      handleToggleButton(task);
+    }, 300);
+  };
+
   const handleSubmit = useCallback(() => {
     handleDeleteButton(task.id);
   }, [handleDeleteButton, task.id]);
@@ -60,42 +76,44 @@ export const TaskView = ({
 
   return (
     <Container>
-      <Main>
-        <TitleContainer>
-          <Title>{ToCamelCase(task.title)}</Title>
-        </TitleContainer>
-        <DescriptionContainer>
-          <Description numberOfLines={2}>
-            {ToCamelCase(task.description)}
-          </Description>
-        </DescriptionContainer>
-      </Main>
+      <Animated.View style={[{opacity}]}>
+        <Main>
+          <TitleContainer>
+            <Title>{ToCamelCase(task.title)}</Title>
+          </TitleContainer>
+          <DescriptionContainer>
+            <Description numberOfLines={2}>
+              {ToCamelCase(task.description)}
+            </Description>
+          </DescriptionContainer>
+        </Main>
 
-      <ActionsContainer>
-        <ActionButton onPress={() => handleToggleButton(task)}>
-          <MaterialIcons
-            size={24}
-            name={task.completed ? 'restore' : 'check-circle'}
-            color={colors.success}
-          />
-        </ActionButton>
-        <ActionButton onPress={() => handleEditButton(task)}>
-          <MaterialIcons
-            size={24}
-            name="edit-document"
-            color={colors.backgroundOpposite}
-          />
-        </ActionButton>
-        <ActionButton onPress={() => setModalVisible(true)}>
-          <MaterialIcons
-            size={24}
-            name="delete-forever"
-            color={colors.danger}
-          />
-        </ActionButton>
-      </ActionsContainer>
+        <ActionsContainer>
+          <ActionButton onPress={() => fadeOutToggleTask()}>
+            <MaterialIcons
+              size={24}
+              name={task.completed ? 'restore' : 'check-circle'}
+              color={colors.success}
+            />
+          </ActionButton>
+          <ActionButton onPress={() => handleEditButton(task)}>
+            <MaterialIcons
+              size={24}
+              name="edit-document"
+              color={colors.backgroundOpposite}
+            />
+          </ActionButton>
+          <ActionButton onPress={() => setModalVisible(true)}>
+            <MaterialIcons
+              size={24}
+              name="delete-forever"
+              color={colors.danger}
+            />
+          </ActionButton>
+        </ActionsContainer>
 
-      {renderModalConfirmation}
+        {renderModalConfirmation}
+      </Animated.View>
     </Container>
   );
 };

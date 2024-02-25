@@ -4,7 +4,6 @@ export const Container = styled.View`
   border-color: ${({theme}) => theme.colors.backgroundOpposite};
   border-radius: 3px;
   border-width: 0.5px;
-  /* padding: 2px; */
   margin: 2px;
   background-color: ${({theme}) => theme.colors.backgroundPrimary};
   min-height: 100px;
@@ -13,7 +12,7 @@ export const Container = styled.View`
 
 export const Main = styled.View`
   justify-content: 'space-between';
-  padding: 4px;
+  padding: 10px;
 `;
 
 export const TitleContainer = styled.View`
